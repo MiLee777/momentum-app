@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum</title>
+    <link href="favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="owfont-regular.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="player">
+            <div class="player-controls">
+                <button class="play-prev player-icon"><img src="icons/play-prev.svg" alt="Previous" class="controls"></button>
+                <button class="play player-icon"></button>
+                <button class="play-next player-icon"><img src="icons/play-next.svg" alt="Next" class="controls"></button>
+            </div>
+            <ul class="play-list"></ul>
+        </div>
+        <div class="weather">
+            <input type="text" value="Bangkok" placeholder="[Enter city]" class="city">
+            <i class="weather-icon owf"></i>
+            <div class="weather-error"></div>
+            <div class="description-container">
+                <span class="temperature"></span>
+                <span class="weather-description"></span>
+            </div>
+            <div class="wind"></div>
+            <div class="humidity"></div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="slider-icons">
+            <button class="slide-prev slider-icon"></button>
+            <button class="slide-next slider-icon"></button>
+        </div>
+        <div class="time"></div>
+        <div class="date"></div>
+        <div class="greeting-container">
+            <span class="greeting"></span>
+            <input type="text" placeholder="[Enter name]" class="name">
+        </div>
+    </main>
+    <footer class="footer">
+        <button class="change-quote">
+            <img src="icons/reload.svg" alt="Reload" width="30">
+        </button>
+        <div>
+            <div class="quote"></div>
+            <div class="author"></div>
+        </div>
+    </footer>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
