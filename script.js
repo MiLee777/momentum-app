@@ -206,7 +206,7 @@ const playListContainer = document.querySelector('.play-list');
 
 const audio = new Audio();
 let songIndex = 0;
-let audioCurrentTime = 0;
+let audioCurrentTime;
 audio.src = playList[songIndex].src;
 
 playList.forEach((el) => {
@@ -216,42 +216,51 @@ playList.forEach((el) => {
     playListContainer.append(li);
 });
 
-play.addEventListener('click', playAudio);
-
 let playing = true;
-
 const playItem = document.querySelectorAll('.play-item');
-
-function playAudio() {
-  playItem.forEach(item => item.classList.remove('item-active'));
-  if (playing) {
-    audio.src = playList[songIndex].src; 
-    audioCurrentTime = 0; 
-    play.classList.add('pause');
-    audio.play();
-    playItem[songIndex].classList.add('item-active');
-    playing = false;
-  } else {
-    play.classList.remove('pause');
-    play.classList.add('play');
-    audio.pause();
-    playing = true;
-  }
-}
 
 playItem.forEach((item, index) => {
   item.addEventListener('click', () => {
-    if (songIndex === index && !audio.paused) {
-      play.classList.toggle('pause');
-      audio.pause();
-      playing = true;
+    if(songIndex === index) {
+      if(audio.paused) {
+        playMusic();
+      } else {
+        pauseMusic();
+      }
     } else {
       songIndex = index;
-      playAudio();
-      playing = true;
+      playMusic();
     }
   })
 })
+
+play.addEventListener('click', () => {
+  if(audio.paused) {
+    playMusic();
+  } else {
+    pauseMusic();
+  }
+});
+
+function playMusic() {
+  audio.src = playList[songIndex].src; 
+  audioCurrentTime = 0; 
+  play.classList.add('pause');
+  audio.play();
+  updateMusicItem();
+  playing = true;
+}
+
+function pauseMusic() {
+  audio.pause();
+  play.classList.remove('pause');
+  playing = false;
+}
+
+function updateMusicItem() {
+  playItem.forEach(item => item.classList.remove('item-active'));
+  playItem[songIndex].classList.add('item-active');
+}
 
 audio.addEventListener('ended', () => {
     nextSong()
@@ -266,7 +275,7 @@ function nextSong() {
     };
     audio.src = playList[songIndex].src;
     playing = true;
-    playAudio();
+    playMusic();
 }
 
 playPrev.addEventListener('click', previousSong);
@@ -278,7 +287,7 @@ function previousSong() {
     }
     audio.src = playList[songIndex].src;
     playing = true;
-    playAudio();
+    playMusic();
 }
 
 
